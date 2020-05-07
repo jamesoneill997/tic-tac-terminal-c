@@ -14,7 +14,6 @@ int main()
     
     for (int i = 0; i <9;i++){
         playerTurn = i==0||i%2==0 ? 1:2;
-        printf("%d",playerTurn);
         move(squares, 9, playerTurn);
         if (checkEnd(squares, 9) == win)
         {
@@ -92,24 +91,25 @@ enum state checkEnd(char board[], int size){
         }
     }
 
-    _Bool winningStates[] = {
-        (board[0] == board[1] == board[2]),
-        (board[3] == board[4] == board[5]),
-        (board[6] == board[7] == board[8]),
-        (board[0] == board[3] == board[6]),
-        (board[1] == board[4] == board[7]),
-        (board[2] == board[5] == board[8]),
-        (board[0] == board[4] == board[8]),
-        (board[2] == board[4] == board[6]),
+    _Bool winningStates[8] = {
+        (board[0] == board[1] && board[1] == board[2]),
+        (board[3] == board[4] && board[4] == board[5]),
+        (board[6] == board[7] && board[7] == board[8]),
+        (board[0] == board[3] && board[3] == board[6]),
+        (board[1] == board[4] && board[4] == board[7]),
+        (board[2] == board[5] && board[5] == board[8]),
+        (board[0] == board[4] && board[4] == board[8]),
+        (board[2] == board[4] && board[4] == board[6]),
     };
 
     for(int i=0; i<8; i++){
-        if (winningStates[i] == 1)
+        if ((int)winningStates[i] == 1)
         {
             gameState = win;
         }
-        
+                
     }
+
 
     return gameState;
     
