@@ -14,15 +14,16 @@ int main()
     
     for (int i = 0; i <9;i++){
         playerTurn = i==0||i%2==0 ? 1:2;
+        printf("%d",playerTurn);
         move(squares, 9, playerTurn);
         if (checkEnd(squares, 9) == win)
         {
-            printf("Player %d wins!",playerTurn);
+            printf("Player %d wins!\n",playerTurn);
             break;
         }
 
         else if(checkEnd(squares, 9) == draw){
-            printf("Draw!");
+            printf("Draw!\n");
             break;
         }
 
@@ -63,9 +64,9 @@ void move(char board[], int size, int player){
     int pos;
     printf("\n Player %d to move\n Select the tile you'd like to populate\n",player);
     scanf("%d",&pos);
-    if ((board[pos] != 'X' || board[pos] != 'O')&&pos<=8)
+    if ((board[pos] != 'X' && board[pos] != 'O')&&pos<=8)
     {
-        board[pos] = player=0?'X':'O';
+        board[pos] = player==1?'X':'O';
     }
     else
     {
@@ -80,11 +81,13 @@ enum state checkEnd(char board[], int size){
     enum state gameState = resume;
 
     for (int i = 0; i < 9;i++){
-        if(board[i] == ' '){
+        if(board[i] == ' ')
+        {
             return gameState;
         }
 
-        else if((board[i] == 'X' || board[i] == 'O') && i==8){
+        else if((board[i] == 'X' || board[i] == 'O') && i==8)
+        {
             gameState = draw;
         }
     }
