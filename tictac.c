@@ -78,6 +78,7 @@ void move(char board[], int size, int player){
 
 enum state checkEnd(char board[], int size){
     enum state gameState = resume;
+    int occupied = 0;
 
     for (int i = 0; i < 9;i++){
         if(board[i] == ' ')
@@ -85,10 +86,15 @@ enum state checkEnd(char board[], int size){
             return gameState;
         }
 
-        else if((board[i] == 'X' || board[i] == 'O') && i==8)
+        else if((board[i] == 'X' || board[i] == 'O'))
         {
-            gameState = draw;
+            occupied++;           
         }
+
+        if (occupied == 8)
+            {
+                gameState = draw;
+            }
     }
 
     _Bool winningStates[8] = {
@@ -109,9 +115,5 @@ enum state checkEnd(char board[], int size){
         }
                 
     }
-
-
     return gameState;
-    
-
 }
